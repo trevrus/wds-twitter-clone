@@ -12,15 +12,16 @@ datasource db {
 }
 
 model Tweet {
-    id         String   @id @default(uuid())
-    user_id    String
-    content    String
-    created_at DateTime @default(now())
+    id        String   @id @default(uuid())
+    userId    String
+    content   String
+    createdAt DateTime @default(now())
 
-    user  User   @relation(fields: [user_id], references: [id], onDelete: Cascade)
+    user  User   @relation(fields: [userId], references: [id], onDelete: Cascade)
     likes Like[]
 
-    @@index([user_id])
+    @@unique([createdAt, id])
+    @@index([userId])
 }
 
 model Like {
